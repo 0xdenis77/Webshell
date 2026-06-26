@@ -1,0 +1,47 @@
+# ============================================
+# .bashrc - Secure Shell by 0xDenis77
+# ============================================
+
+# Warna Bold
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[1;34m'
+PURPLE='\033[1;35m'
+CYAN='\033[1;36m'
+NC='\033[0m'
+
+# Banner
+echo -e "${CYAN}================================================================================${NC}"
+echo -e "${GREEN}                          ACTIVE & READY${NC}"
+echo -e "${PURPLE}                        Touch By 0xDenis77${NC}"
+echo -e "${CYAN}================================================================================${NC}"
+
+EXPECTED_HASH="c3e20d7ce49a00ae64d3ac0493321094465c7d1ef44eb416ba16afe4c3d254d2"
+ATTEMPTS=0
+MAX_ATTEMPTS=3
+
+# Trap Ctrl+C di dalam loop
+while [ $ATTEMPTS -lt $MAX_ATTEMPTS ]; do
+    trap 'echo -e "\n${RED}[!] Access denied. Connection closed.${NC}"; exit 1' INT
+    echo -e -n "${YELLOW}Enter Password: ${NC}"
+    read -s user_pass
+    echo
+    INPUT_HASH=$(echo -n "$user_pass" | sha256sum | awk '{print $1}')
+    if [ "$INPUT_HASH" = "$EXPECTED_HASH" ]; then
+        echo -e "${GREEN}Access Granted. Welcome.. :}${NC}"
+        break
+    else
+        ATTEMPTS=$((ATTEMPTS + 1))
+        REMAINING=$((MAX_ATTEMPTS - ATTEMPTS))
+        echo -e "${RED}Incorrect password!${NC} Attempts remaining: $REMAINING"
+        if [ $ATTEMPTS -ge $MAX_ATTEMPTS ]; then
+            echo -e "${RED}Too many failed attempts. Connection closed.${NC}"
+            exit 1
+        fi
+    fi
+done
+
+# Custom Prompt (Bold)
+PS1="\[\033[1;36m\]\u\[\033[m\]@\[\033[1;32m\]\h:\[\033[1;33m\]\w\[\033[m\]\$ "
+export PS1
