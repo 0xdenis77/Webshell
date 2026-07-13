@@ -1,6 +1,6 @@
 <?php
 // ===================================================
-// GANTI PASSWORD DI SINI YA, GANTI PASS PAKE BCRYPT //default pass dnend993
+// GANTI PASSWORD DI SINI YA, GANTI PASS PAKE BCRYPT
 define('DNEND_PASS','$2a$12$6NI1I1llD0oaBtq06t3Q7.LTprQs4xgrcKudDvSWGRWOvNTnxKKP.');
 // ===================================================
 if(!defined('DNEND_KEY'))    define('DNEND_KEY','dn3nd99x!k82');
